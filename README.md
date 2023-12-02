@@ -23,3 +23,5 @@ API_KEY='{openweathermap_api_key}'
 - cd ios & pod install (if it wants to run on iOS)
 - open an emulator or simulator or connect to a real device
 - flutter run
+
+[Download APK](https://github.com/yamikhsan/weather_app/releases)
