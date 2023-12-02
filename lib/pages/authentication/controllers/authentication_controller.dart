@@ -132,29 +132,24 @@ class AuthenticationController extends GetxController {
       log('phone: $phone');
       await auth.verifyPhoneNumber(
         phoneNumber: phone,
-        // timeout: const Duration(seconds: 60),
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          // ANDROID ONLY!
-          openSnackBar();
-          await auth.signInWithCredential(credential);
-          closeSnackBar();
-          cleanTextController();
-        },
+        verificationCompleted: (PhoneAuthCredential credential) async {},
         verificationFailed: (FirebaseAuthException e) {
           catchMessage(e.message ?? 'unknown');
         },
         codeSent: (String verificationId, int? resendToken) async {
           String smsCode = await toOTP();
 
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: verificationId,
-            smsCode: smsCode,
-          );
+          if (smsCode.isNotEmpty) {
+            PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: verificationId,
+              smsCode: smsCode,
+            );
 
-          openSnackBar();
-          await auth.signInWithCredential(credential);
-          closeSnackBar();
-          cleanTextController();
+            openSnackBar();
+            await auth.signInWithCredential(credential);
+            closeSnackBar();
+            cleanTextController();
+          }
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );

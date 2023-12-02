@@ -42,7 +42,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/app/src/google-service.json
+/android/app/google-services.json
 /android/key.properties
 
 # IOS
